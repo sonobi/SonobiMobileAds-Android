@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
  * Created by jgo on 10/5/17.
  */
 
-public class SonobiKeymaker {
+public class Keymaker {
 
     //Constant query params
     public final String BASE_TRINITY_URL = "https://matrix-local.connollygroup.com/trinity?key_maker=";
@@ -27,9 +27,9 @@ public class SonobiKeymaker {
     public String url;
     public Object rawResponse;
     public JSONObject parsedResponse;
-    public ExtraTrinityParamManager extraTrinityParamManager;
+    public ExtraTrinityParams extraTrinityParamManager;
 
-    public SonobiKeymaker(Integer id, String adUnitId, String sizesCsv, ExtraTrinityParamManager extraTrinityParamManager) {
+    public Keymaker(Integer id, String adUnitId, String sizesCsv, ExtraTrinityParams extraTrinityParamManager) {
 
         this.adUnitId = adUnitId;
         this.sizesCsv = sizesCsv;

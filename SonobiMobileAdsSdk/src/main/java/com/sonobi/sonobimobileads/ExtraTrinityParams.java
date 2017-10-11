@@ -6,7 +6,7 @@ package com.sonobi.sonobimobileads;
 
 
 
-public class ExtraTrinityParamManager {
+public class ExtraTrinityParams {
 
     private String hfa = "";
     private String cdf = "";

@@ -12,13 +12,13 @@ import org.json.JSONObject;
  * Created by jgo on 10/4/17.
  */
 
-public class SonobiMobileBannerAd {
+public class DfpBannerAd {
 
     private PublisherAdView bannerAdView;
     private JSONObject config;
-    private ExtraTrinityParamManager extraTrinityParamManager;
+    private ExtraTrinityParams extraTrinityParamManager;
 
-    public SonobiMobileBannerAd(PublisherAdView bannerAdView, String config, ExtraTrinityParamManager extraTrinityParamManager) {
+    public DfpBannerAd(PublisherAdView bannerAdView, String config, ExtraTrinityParams extraTrinityParamManager) {
         this.bannerAdView = bannerAdView;
         this.extraTrinityParamManager = extraTrinityParamManager;
         try {
@@ -64,7 +64,7 @@ public class SonobiMobileBannerAd {
         }
 
         //Do the trinity request
-        SonobiKeymaker sonobiKeymaker = new SonobiKeymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParamManager);
+        Keymaker sonobiKeymaker = new Keymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParamManager);
         keymakerResponse = sonobiKeymaker.executeRequest(Integer.valueOf(timeout.toString()), testMode);
 
         //try to get sbi_dc from the response
