@@ -64,7 +64,7 @@ public class DfpInterstitialAd extends SonobiConfig {
 
         //try to get the bid response
         try {
-            bidResponse = keymakerResponse.getJSONObject("slots").getJSONObject(bannerAdView.getAdUnitId() + "|" + 1);
+            bidResponse = keymakerResponse.getJSONObject("slots").getJSONObject(sonobiKeymaker.slotKey);
             //bidResponse = keymakerResponse.getJSONObject("slots").getJSONObject("mobile-test");
         } catch (JSONException e) { //if it errors, return the adRequest
             e.printStackTrace();

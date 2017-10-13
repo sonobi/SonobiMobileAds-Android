@@ -17,7 +17,6 @@ import org.json.JSONObject;
 /**
  * Sonobi Banner Ad for rendering sonobi ads without an ad server.
  */
-@Keep
 public class BannerAd extends SonobiConfig {
 
     private static final String NO_FILL_RESPONSE = "No Fill";
@@ -33,6 +32,7 @@ public class BannerAd extends SonobiConfig {
      * @param adUnitId The /ad/unit/id or a sonobi placement_id
      * @param size     WxH string
      */
+    @Keep
     public BannerAd(Context context, String adUnitId, AdSize size, ExtraTrinityParams extraTrinityParams) {
         super();
         this.adUnitId = adUnitId;
@@ -42,6 +42,7 @@ public class BannerAd extends SonobiConfig {
 
     }
 
+    @Keep
     public void setAdListener(AdListener adListener) {
         this.adListener = adListener;
     }
@@ -64,6 +65,7 @@ public class BannerAd extends SonobiConfig {
         return webView;
     }
 
+    @Keep
     public View load() {
 
         JSONObject keymakerResponse;

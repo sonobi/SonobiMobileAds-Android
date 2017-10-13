@@ -13,7 +13,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by jgo on 10/4/17.
  */
 
-public class HttpsRequest extends AsyncTask<Object, Void, Object> {
+class HttpsRequest extends AsyncTask<Object, Void, Object> {
 
     private String methodType;
     private Integer timeout;

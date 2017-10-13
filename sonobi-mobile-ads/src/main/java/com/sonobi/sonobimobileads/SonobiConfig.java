@@ -12,7 +12,7 @@ import android.support.annotation.Keep;
  * timeout - time in milliseconds willing to wait for the trinity request to respond
  * testMode - enable or disable the test cookie
  */
-public class SonobiConfig {
+ class SonobiConfig {
 
     private boolean testMode = false;
     private int timeout = 5000;
