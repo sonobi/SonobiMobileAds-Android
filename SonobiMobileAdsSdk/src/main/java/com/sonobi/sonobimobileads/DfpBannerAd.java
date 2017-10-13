@@ -1,5 +1,7 @@
 package com.sonobi.sonobimobileads;
 
+import android.support.annotation.Keep;
+
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
@@ -12,28 +14,23 @@ import org.json.JSONObject;
  * Created by jgo on 10/4/17.
  */
 
-public class DfpBannerAd {
+public class DfpBannerAd extends SonobiConfig {
 
     private PublisherAdView bannerAdView;
-    private JSONObject config;
-    private ExtraTrinityParams extraTrinityParamManager;
+    private ExtraTrinityParams extraTrinityParams;
 
-    public DfpBannerAd(PublisherAdView bannerAdView, String config, ExtraTrinityParams extraTrinityParamManager) {
+    @Keep
+    public DfpBannerAd(PublisherAdView bannerAdView, ExtraTrinityParams extraTrinityParams) {
+        super();
         this.bannerAdView = bannerAdView;
-        this.extraTrinityParamManager = extraTrinityParamManager;
-        try {
-            this.config = new JSONObject(config);
-        } catch (JSONException e) {
-            this.config = new JSONObject();
-        }
+        this.extraTrinityParams = extraTrinityParams;
     }
 
+    @Keep
     public PublisherAdRequest.Builder requestBid(PublisherAdRequest.Builder adRequest) {
-        Object timeout;
         String sizes = "";
         JSONObject keymakerResponse;
         JSONObject bidResponse;
-        Boolean testMode;
 
         //Targeting variables;
         String sbiDc;
@@ -50,22 +47,10 @@ public class DfpBannerAd {
             sizes = sizes.substring(0, sizes.length() - 1);
         }
 
-        //Get our timeout
-        try {
-             timeout = this.config.get("timeout");
-        } catch (JSONException e) {
-            timeout = "15000";
-        }
-
-        try {
-            testMode = this.config.getBoolean("test");
-        }catch (JSONException e) {
-            testMode = false;
-        }
 
         //Do the trinity request
-        Keymaker sonobiKeymaker = new Keymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParamManager);
-        keymakerResponse = sonobiKeymaker.executeRequest(Integer.valueOf(timeout.toString()), testMode);
+        Keymaker sonobiKeymaker = new Keymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParams);
+        keymakerResponse = sonobiKeymaker.executeRequest(this.getTimeout(), this.isTestMode());
 
         //try to get sbi_dc from the response
         try {

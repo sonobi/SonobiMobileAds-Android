@@ -2,6 +2,7 @@ package com.sonobi.sonobimobileads;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Keep;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -17,7 +18,8 @@ import org.json.JSONObject;
 /**
  * Sonobi Banner Ad for rendering sonobi ads without an ad server.
  */
-public class BannerAd {
+@Keep
+public class BannerAd extends SonobiConfig {
 
     private static final String NO_FILL_RESPONSE = "No Fill";
 
@@ -34,7 +36,7 @@ public class BannerAd {
      * @param size WxH string
      */
     public BannerAd(Context context, String adUnitId, AdSize size, ExtraTrinityParams extraTrinityParams) {
-
+        super();
         this.adUnitId = adUnitId;
         this.size = size;
         this.context = context;
@@ -75,7 +77,7 @@ public class BannerAd {
 
         //Do the trinity request
         Keymaker sonobiKeymaker = new Keymaker(1, this.adUnitId, this.size.getSize(), this.extraTrinityParams);
-        keymakerResponse = sonobiKeymaker.executeRequest(5000, false);
+        keymakerResponse = sonobiKeymaker.executeRequest(this.getTimeout(), this.isTestMode());
 
         //try to get sbi_dc from the response
         try {

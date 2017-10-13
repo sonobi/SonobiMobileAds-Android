@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 group = 'com.sonobi'
-version = '1.0.11-SNAPSHOT'
+version = '1.0.15-SNAPSHOT'
 
 android {
     compileSdkVersion 26
@@ -10,12 +10,12 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.11"
+        versionName "1.0.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,6 +28,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.google.android.gms:play-services-ads:11.2.0'
+    compile 'com.android.support:support-annotations:24.2.0'
     testCompile 'junit:junit:4.12'
 }
 

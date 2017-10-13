@@ -1,11 +1,13 @@
 package com.sonobi.sonobimobileads;
 
+import android.support.annotation.Keep;
+
 /**
  * Created by jgo on 10/5/17.
  */
 
 
-
+@Keep
 public class ExtraTrinityParams {
 
     private String hfa = "";
