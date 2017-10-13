@@ -7,6 +7,14 @@ import android.support.annotation.Keep;
  */
 
 
+/**
+ * Class to define extra trinity parameters for targeting
+ * Available Options:
+ * hfa - A publisher provided ID
+ * cdf - A Custom Data field for reporting
+ * ant - Extra Targeting paramater for appnexus s2s
+ * gmgt - Extra Targeting for guardian?
+ */
 @Keep
 public class ExtraTrinityParams {
 

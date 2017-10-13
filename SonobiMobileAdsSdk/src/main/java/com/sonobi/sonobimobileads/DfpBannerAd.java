@@ -14,11 +14,19 @@ import org.json.JSONObject;
  * Created by jgo on 10/4/17.
  */
 
+/**
+ * Class to request bids from sonobi and set targeting on the ad request
+ */
 public class DfpBannerAd extends SonobiConfig {
 
     private PublisherAdView bannerAdView;
     private ExtraTrinityParams extraTrinityParams;
 
+    /**
+     * Constructor
+     * @param bannerAdView {PublisherAdView} The Ad view to grab the adunit, sizes, and id from
+     * @param extraTrinityParams {ExtraTrinityParams} extra targeting parameters to pass to the trinity request
+     */
     @Keep
     public DfpBannerAd(PublisherAdView bannerAdView, ExtraTrinityParams extraTrinityParams) {
         super();
@@ -26,6 +34,12 @@ public class DfpBannerAd extends SonobiConfig {
         this.extraTrinityParams = extraTrinityParams;
     }
 
+    /**
+     * Method to request a bid from trinity
+     *
+     * @param adRequest {PublisherAdRequest.Builder} The ad request builder to add sbi_* targeting to
+     * @return PublisherAdRequest.Builder The instance of the PublisherAdRequest.Builder that was initially passed in
+     */
     @Keep
     public PublisherAdRequest.Builder requestBid(PublisherAdRequest.Builder adRequest) {
         String sizes = "";

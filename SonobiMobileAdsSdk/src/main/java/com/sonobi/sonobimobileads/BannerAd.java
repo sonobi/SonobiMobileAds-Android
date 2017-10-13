@@ -1,6 +1,5 @@
 package com.sonobi.sonobimobileads;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Keep;
 import android.view.View;
@@ -30,10 +29,9 @@ public class BannerAd extends SonobiConfig {
     private ExtraTrinityParams extraTrinityParams;
 
     /**
-     *
-     * @param context The context to render the ad to
+     * @param context  The context to render the ad to
      * @param adUnitId The /ad/unit/id or a sonobi placement_id
-     * @param size WxH string
+     * @param size     WxH string
      */
     public BannerAd(Context context, String adUnitId, AdSize size, ExtraTrinityParams extraTrinityParams) {
         super();
@@ -50,7 +48,7 @@ public class BannerAd extends SonobiConfig {
 
     private String formSbijs(String dataCenter, String aId) {
 
-        return "<html><body style='margin: 0'><script type='text/javascript' src='http://matrix-local.wp.cs.connollygroup.com/sbi.js?aid="+ aId +"&as=null'></script></body></html>";
+        return "<html><body style='margin: 0'><script type='text/javascript' src='http://matrix-local.wp.cs.connollygroup.com/sbi.js?aid=" + aId + "&as=null'></script></body></html>";
 
     }
 

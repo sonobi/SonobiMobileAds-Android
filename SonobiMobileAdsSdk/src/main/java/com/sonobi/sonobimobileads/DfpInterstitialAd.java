@@ -18,6 +18,12 @@ public class DfpInterstitialAd extends SonobiConfig {
     private PublisherInterstitialAd bannerAdView;
     private ExtraTrinityParams extraTrinityParams;
 
+    /**
+     * Constructor
+     *
+     * @param bannerAdView       {PublisherInterstitialAd} The Ad view to grab the adunit from
+     * @param extraTrinityParams {ExtraTrinityParams} extra targeting parameters to pass to the trinity request
+     */
     @Keep
     public DfpInterstitialAd(PublisherInterstitialAd bannerAdView, ExtraTrinityParams extraTrinityParams) {
         super();
@@ -25,6 +31,12 @@ public class DfpInterstitialAd extends SonobiConfig {
         this.extraTrinityParams = extraTrinityParams;
     }
 
+    /**
+     * Method to request a bid from trinity
+     *
+     * @param adRequest {PublisherAdRequest.Builder} The ad request builder to add sbi_* targeting to
+     * @return PublisherAdRequest.Builder The instance of the PublisherAdRequest.Builder that was initially passed in
+     */
     @Keep
     public PublisherAdRequest.Builder requestBid(PublisherAdRequest.Builder adRequest) {
         String sizes = "interstitial";

@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 @Keep
 public class AdView extends RelativeLayout {
 
-    public AdView (Context context, AttributeSet attrs) {
+    public AdView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

@@ -38,7 +38,7 @@ public class Keymaker {
         this.extraTrinityParamManager = extraTrinityParamManager;
 
         String url = BASE_TRINITY_URL;
-        url+= "{\"" + this.adUnitId + "|" + id + "\":\"" + this.sizesCsv + "\"}";
+        url += "{\"" + this.adUnitId + "|" + id + "\":\"" + this.sizesCsv + "\"}";
 //      url += "{\"mobile-test\":\"f7d3088e7e7e9a2b1126\"}";
         url += "&cv=" + this.CV;
 
@@ -57,19 +57,19 @@ public class Keymaker {
                 ant = this.extraTrinityParamManager.getAnt(),
                 gmgt = this.extraTrinityParamManager.getGmgt();
 
-        if(hfa.length() > 0) {
+        if (hfa.length() > 0) {
             url += "&hfa=" + hfa;
         }
 
-        if(cdf.length() > 0) {
+        if (cdf.length() > 0) {
             url += "&cdf=" + cdf;
         }
 
-        if(ant.length() > 0) {
+        if (ant.length() > 0) {
             url += "&ant=" + ant;
         }
 
-        if(gmgt.length() > 0) {
+        if (gmgt.length() > 0) {
             url += "&gmgt=" + gmgt;
         }
 
@@ -114,7 +114,6 @@ public class Keymaker {
         return parsedResponse;
 
     }
-
 
 
 }

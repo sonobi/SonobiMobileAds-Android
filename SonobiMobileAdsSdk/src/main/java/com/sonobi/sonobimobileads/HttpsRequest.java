@@ -40,7 +40,7 @@ public class HttpsRequest extends AsyncTask<Object, Void, Object> {
             connection.setReadTimeout(this.timeout);
             connection.setConnectTimeout(this.timeout);
 
-            if(this.testMode) {
+            if (this.testMode) {
                 connection.setRequestProperty("Cookie", "sbi_test={\"sbi_apoc\":\"guarantee\",\"sbi_mouse\":20};");
             }
 
@@ -51,7 +51,7 @@ public class HttpsRequest extends AsyncTask<Object, Void, Object> {
             BufferedReader reader = new BufferedReader(streamReader);
             StringBuilder stringBuilder = new StringBuilder();
 
-            while((inputLine = reader.readLine()) != null){
+            while ((inputLine = reader.readLine()) != null) {
                 stringBuilder.append(inputLine);
             }
 
@@ -60,7 +60,6 @@ public class HttpsRequest extends AsyncTask<Object, Void, Object> {
             streamReader.close();
             //Set our result equal to our stringBuilder
             result = stringBuilder.toString();
-
 
 
         } catch (IOException e) {
