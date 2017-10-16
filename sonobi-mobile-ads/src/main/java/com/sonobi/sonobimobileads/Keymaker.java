@@ -23,12 +23,24 @@ class Keymaker {
     String slotKey;
     private String url;
 
-    Keymaker(Integer id, String adUnitId, String sizesCsv, ExtraTrinityParams extraTrinityParamManager) {
+    Keymaker(Integer id, String adUnitId, String sizesCsv, ExtraTrinityParams extraTrinityParams) {
+
+        String hfa = extraTrinityParams.getHfa(),
+                cdf = extraTrinityParams.getCdf(),
+                ant = extraTrinityParams.getAnt(),
+                gmgt = extraTrinityParams.getGmgt(),
+                floor = extraTrinityParams.getFloor();
 
         this.slotKey = adUnitId + "|" + id;
 
         String url = BASE_TRINITY_URL;
-        url += "{\"" + this.slotKey + "\":\"" + sizesCsv + "\"}";
+        url += "{\"" + this.slotKey + "\":\"" + sizesCsv;
+
+        if(floor.length() > 0) {
+            url += "|f=" + floor;
+        }
+
+        url += "\"}";
 //      url += "{\"mobile-test\":\"f7d3088e7e7e9a2b1126\"}";
         url += "&cv=" + CV;
 
@@ -42,10 +54,7 @@ class Keymaker {
 
         url += "&vc=" + VC;
 
-        String hfa = extraTrinityParamManager.getHfa(),
-                cdf = extraTrinityParamManager.getCdf(),
-                ant = extraTrinityParamManager.getAnt(),
-                gmgt = extraTrinityParamManager.getGmgt();
+
 
         if (hfa.length() > 0) {
             url += "&hfa=" + hfa;

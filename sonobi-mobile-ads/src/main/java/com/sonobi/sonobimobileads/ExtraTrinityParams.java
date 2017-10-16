@@ -22,6 +22,7 @@ public class ExtraTrinityParams {
     private String cdf = "";
     private String ant = "";
     private String gmgt = "";
+    private String floor = "";
 
     public String getHfa() {
         return hfa;
@@ -55,4 +56,11 @@ public class ExtraTrinityParams {
         this.gmgt = gmgt;
     }
 
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
 }
