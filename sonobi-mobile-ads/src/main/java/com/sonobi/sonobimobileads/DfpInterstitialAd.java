@@ -50,7 +50,7 @@ public class DfpInterstitialAd extends SonobiConfig {
         String sbiDozer;
 
         //Do the trinity request
-        Keymaker sonobiKeymaker = new Keymaker(1, bannerAdView.getAdUnitId(), sizes, this.extraTrinityParams);
+        Keymaker sonobiKeymaker = new Keymaker(1, bannerAdView.getAdUnitId(), sizes, this.extraTrinityParams, "POST");
         keymakerResponse = sonobiKeymaker.executeRequest(this.getTimeout(), this.isTestMode());
 
         //try to get sbi_dc from the response
