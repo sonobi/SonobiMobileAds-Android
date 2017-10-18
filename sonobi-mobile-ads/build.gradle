@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 group = 'com.sonobi'
-version = '1.0.24-SNAPSHOT'
+version = '1.0.0-alpha.4-SNAPSHOT'
 
 android {
     compileSdkVersion 26
@@ -10,12 +10,12 @@ android {
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0.24"
+        versionName "1.0.0-alpha.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

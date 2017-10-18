@@ -2,7 +2,10 @@ package com.sonobi.sonobimobileads;
 
 import android.os.AsyncTask;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -13,20 +16,28 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by jgo on 10/4/17.
  */
 
-class HttpsRequest extends AsyncTask<Object, Void, Object> {
+public class HttpsRequest extends AsyncTask<Object, Void, Object> {
 
     private String methodType;
     private Integer timeout;
     private Boolean testMode = false;
+    private JSONObject body;
 
-    HttpsRequest(String methodType, Integer timeout, Boolean testMode) {
+    public HttpsRequest(String methodType, Integer timeout, Boolean testMode) {
         this.methodType = methodType;
         this.timeout = timeout;
         this.testMode = testMode;
     }
 
+    public HttpsRequest(String methodType, Integer timeout, Boolean testMode, JSONObject body) {
+        this.methodType = methodType;
+        this.timeout = timeout;
+        this.testMode = testMode;
+        this.body = body;
+    }
+
     @Override
-    protected Object doInBackground(Object[] objects) {
+    public Object doInBackground(Object[] objects) {
         String url = objects[0].toString();
         Object result;
         String inputLine;
@@ -44,7 +55,20 @@ class HttpsRequest extends AsyncTask<Object, Void, Object> {
                 connection.setRequestProperty("Cookie", "sbi_test={\"sbi_apoc\":\"guarantee\",\"sbi_mouse\":20};");
             }
 
-            connection.connect();
+            if(this.body != null) { //Write the body to the connection
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+
+                connection.setDoOutput(true);
+                connection.setDoInput(true);
+                DataOutputStream os = new DataOutputStream(connection.getOutputStream());
+                os.writeBytes(this.body.toString());
+
+                os.flush();
+                os.close();
+            } else {
+                connection.connect();
+            }
 
             InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
 
@@ -71,7 +95,7 @@ class HttpsRequest extends AsyncTask<Object, Void, Object> {
     }
 
     @Override
-    protected void onPostExecute(Object result) {
+    public void onPostExecute(Object result) {
         super.onPostExecute(result);
     }
 }

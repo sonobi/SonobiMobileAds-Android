@@ -63,7 +63,7 @@ public class DfpBannerAd extends SonobiConfig {
 
 
         //Do the trinity request
-        Keymaker sonobiKeymaker = new Keymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParams);
+        Keymaker sonobiKeymaker = new Keymaker(bannerAdView.getId(), bannerAdView.getAdUnitId(), sizes, this.extraTrinityParams, "POST");
         keymakerResponse = sonobiKeymaker.executeRequest(this.getTimeout(), this.isTestMode());
 
         //try to get sbi_dc from the response
