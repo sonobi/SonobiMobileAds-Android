@@ -1,5 +1,7 @@
 package com.sonobi.sonobimobileads;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class Keymaker {
 
     //Constant query params
-    private final static String BASE_TRINITY_URL = "https://matrix-local.connollygroup.com/trinity";
+    private final static String BASE_TRINITY_URL = "https://apex.go.sonobi.com/trinity.json";
     private final static String CV = "sbi";
     private final static String VP = "mobile";
     private final static String S = UUID.randomUUID().toString();
@@ -32,11 +34,19 @@ public class Keymaker {
                 ant = extraTrinityParams.getAnt(),
                 gmgt = extraTrinityParams.getGmgt(),
                 floor = extraTrinityParams.getFloor();
-
-        this.slotKey = adUnitId + "|" + id;
-
         String url = BASE_TRINITY_URL;
-        url += "?key_maker={\"" + this.slotKey + "\":\"" + sizesCsv;
+
+        System.out.println(adUnitId + " Sonobi");
+
+        if(adUnitId.charAt(0) == '/') {
+            this.slotKey = adUnitId + "|" + id;
+            url += "?key_maker={\"" + this.slotKey + "\":\"" + sizesCsv;
+        } else {
+            Log.d("SonobiMobileAds", adUnitId);
+            this.slotKey = id.toString();
+            url += "?key_maker={\"" + this.slotKey + "\":\""+ adUnitId + "|" + sizesCsv;
+        }
+
 
         if(floor.length() > 0) {
             url += "|f=" + floor;
@@ -78,61 +88,6 @@ public class Keymaker {
         this.method = "GET";
     }
 
-    public Keymaker(Integer id, String adUnitId, String sizesCsv, ExtraTrinityParams extraTrinityParams, String method) {
-
-        String hfa = extraTrinityParams.getHfa(),
-                cdf = extraTrinityParams.getCdf(),
-                ant = extraTrinityParams.getAnt(),
-                gmgt = extraTrinityParams.getGmgt(),
-                floor = extraTrinityParams.getFloor();
-
-        this.slotKey = adUnitId + "|" + id;
-
-        JSONObject body = new JSONObject();
-
-        JSONObject keymaker = new JSONObject();
-
-        String value = sizesCsv;
-
-        if(floor.length() > 0) {
-            value += "|f=" + floor;
-        }
-
-        try {
-
-            keymaker.put(this.slotKey, value);
-
-            if(hfa.length() > 0) {
-                body.put("hfa", hfa);
-            }
-
-            if(cdf.length() > 0) {
-                body.put("cdf", cdf);
-            }
-
-            if(ant.length() > 0) {
-                body.put("ant", ant);
-            }
-
-            if(gmgt.length() > 0) {
-                body.put("gmgt", gmgt);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            body.put("key_maker", keymaker);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        this.url = BASE_TRINITY_URL;
-        this.method = method;
-        this.body = body;
-    }
-
     public JSONObject executeRequest(Integer timeout, Boolean testMode) {
 
         HttpsRequest httpsRequest = new HttpsRequest(this.method, timeout, testMode, this.body);
@@ -140,6 +95,7 @@ public class Keymaker {
         JSONObject parsedResponse = new JSONObject();
         try {
             try {
+
                 rawResponse = httpsRequest.execute(this.url).get().toString();
                 parsedResponse = this.parseResponse(rawResponse);
 
@@ -158,9 +114,6 @@ public class Keymaker {
 
         JSONObject parsedResponse;
         String stringedResponse = rawResponse.toString();
-
-        stringedResponse = stringedResponse.replace("sbi(", "");
-        stringedResponse = stringedResponse.replace(");", "");
 
         try {
             parsedResponse = new JSONObject(stringedResponse);
