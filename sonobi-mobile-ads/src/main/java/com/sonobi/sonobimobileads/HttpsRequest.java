@@ -52,7 +52,7 @@ public class HttpsRequest extends AsyncTask<Object, Void, Object> {
             connection.setConnectTimeout(this.timeout);
 
             if (this.testMode) {
-                connection.setRequestProperty("Cookie", "sbi_test={\"sbi_apoc\":\"guarantee\",\"sbi_mouse\":20};");
+                connection.setRequestProperty("Cookie", "sbi_test={\"sbi_apoc\":\"guarantee\",\"sbi_mouse\":20}; domain=go.sonobi.com; path=/");
             }
 
             if(this.body != null) { //Write the body to the connection
@@ -84,6 +84,7 @@ public class HttpsRequest extends AsyncTask<Object, Void, Object> {
             streamReader.close();
             //Set our result equal to our stringBuilder
             result = stringBuilder.toString();
+            System.out.println(result);
 
 
         } catch (IOException e) {

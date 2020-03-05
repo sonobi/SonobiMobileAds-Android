@@ -1,10 +1,8 @@
 package com.sonobi.sonobimobileads;
-
-import android.support.annotation.Keep;
-
 /**
  * Created by jgo on 10/5/17.
  */
+
 
 
 /**
@@ -15,7 +13,7 @@ import android.support.annotation.Keep;
  * ant - Extra Targeting paramater for appnexus s2s
  * gmgt - Extra Targeting for guardian?
  */
-@Keep
+
 public class ExtraTrinityParams {
 
     private String hfa = "";
