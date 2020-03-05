@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 group = 'com.sonobi'
-version = '1.0.0-alpha.30-SNAPSHOT'
+version = '1.0.0'
 
 android {
     compileSdkVersion 28
@@ -35,13 +35,33 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "https://nexus.connollygroup.com/repository/maven-snapshots/") {
-                authentication(userName: mavenUser, password: mavenPassword)
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/sonobi/sonobi-mobile-ads-android")
+                credentials {
+                    username = githubUser
+                    password = githubKey
+                }
+            }
+        }
+        publications {
+            gpr(MavenPublication) {
+                from(components.release)
             }
         }
     }
 }
+
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: "https://nexus.connollygroup.com/repository/maven-snapshots/") {
+//                authentication(userName: mavenUser, password: mavenPassword)
+//            }
+//        }
+//    }
+//}
